@@ -2,7 +2,6 @@ package com.SpaManagementSystem.ISD.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,7 @@ import com.SpaManagementSystem.ISD.model.Facility;
 import com.SpaManagementSystem.ISD.repository.FacilityRepository;
 
 @RestController
-@RequestMapping("/SpaManagementSystem/facilityManagement")
+@RequestMapping("/v1/facility")
 public class FacilityController {
 
 	private FacilityRepository facilityRepository;

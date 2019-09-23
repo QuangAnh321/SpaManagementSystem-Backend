@@ -5,7 +5,18 @@
 -- Dumped from database version 11.5
 -- Dumped by pg_dump version 11.5
 
--- Started on 2019-09-22 17:20:26
+-- Started on 2019-09-22 19:40:58
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -33,7 +44,6 @@ END;
 $$;
 
 
-ALTER FUNCTION public.set_updated_timestamp() OWNER TO postgres;
 
 SET default_tablespace = '';
 
@@ -57,7 +67,6 @@ CREATE TABLE public.branch (
 );
 
 
-ALTER TABLE public.branch OWNER TO postgres;
 
 --
 -- TOC entry 198 (class 1259 OID 16447)
@@ -73,10 +82,10 @@ CREATE SEQUENCE public.branch_branch_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.branch_branch_id_seq OWNER TO postgres;
+ALTER TABLE public.branch_branch_id_seq;
 
 --
--- TOC entry 2864 (class 0 OID 0)
+-- TOC entry 2865 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: branch_branch_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -102,8 +111,6 @@ CREATE TABLE public.facility (
 );
 
 
-ALTER TABLE public.facility OWNER TO postgres;
-
 --
 -- TOC entry 197 (class 1259 OID 16436)
 -- Name: facility_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -118,10 +125,8 @@ CREATE SEQUENCE public.facility_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.facility_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2865 (class 0 OID 0)
+-- TOC entry 2866 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: facility_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -147,8 +152,6 @@ CREATE TABLE public.product (
 );
 
 
-ALTER TABLE public.product OWNER TO postgres;
-
 --
 -- TOC entry 201 (class 1259 OID 16460)
 -- Name: product_category; Type: TABLE; Schema: public; Owner: postgres
@@ -161,8 +164,6 @@ CREATE TABLE public.product_category (
     updated_at timestamp without time zone DEFAULT now()
 );
 
-
-ALTER TABLE public.product_category OWNER TO postgres;
 
 --
 -- TOC entry 200 (class 1259 OID 16458)
@@ -178,10 +179,8 @@ CREATE SEQUENCE public.product_category_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.product_category_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2866 (class 0 OID 0)
+-- TOC entry 2867 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: product_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -202,11 +201,8 @@ CREATE SEQUENCE public.product_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.product_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2867 (class 0 OID 0)
+-- TOC entry 2868 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -252,10 +248,8 @@ ALTER TABLE ONLY public.product_category ALTER COLUMN id SET DEFAULT nextval('pu
 -- Data for Name: branch; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.branch (id, name, phone_number, address, description, email, created_at, updated_at, photo_dir) FROM stdin;
-1	Hoa Lan Cau Giay	113	169 Cay Giay	\N	\N	2019-09-18 11:22:55.638863	2019-09-18 11:22:55.638863	\N
-2	Hoa Lan Thanh Xuan	0999888777	350 Thanh Xuan	\N	\N	2019-09-22 16:26:29.359371	2019-09-22 16:27:10.177883	\N
-\.
+INSERT INTO public.branch (id, name, phone_number, address, description, email, created_at, updated_at, photo_dir) VALUES (1, 'Hoa Lan Cau Giay', '113', '169 Cay Giay', NULL, NULL, '2019-09-18 11:22:55.638863', '2019-09-18 11:22:55.638863', NULL);
+INSERT INTO public.branch (id, name, phone_number, address, description, email, created_at, updated_at, photo_dir) VALUES (2, 'Hoa Lan Thanh Xuan', '0999888777', '350 Thanh Xuan', NULL, NULL, '2019-09-22 16:26:29.359371', '2019-09-22 16:27:10.177883', NULL);
 
 
 --
@@ -264,11 +258,9 @@ COPY public.branch (id, name, phone_number, address, description, email, created
 -- Data for Name: facility; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.facility (name, price, description, quantity, photo_dir, status, id, created_at, updated_at) FROM stdin;
-Quat dien	3000000	Dung de lam mat	1960	\N	0	3	2019-09-22 16:45:50.165715	2019-09-22 16:45:57.983674
-May say toc	5000000	De say toc	69	\N	1	1	2019-09-22 16:45:50.165715	2019-09-22 16:56:54.326725
-May hap toc	1000000	Dung de say toc	6969	\N	1	5	2019-09-22 16:45:50.165715	2019-09-22 16:59:22.709837
-\.
+INSERT INTO public.facility (name, price, description, quantity, photo_dir, status, id, created_at, updated_at) VALUES ('Quat dien', 3000000, 'Dung de lam mat', 1960, NULL, 0, 3, '2019-09-22 16:45:50.165715', '2019-09-22 16:45:57.983674');
+INSERT INTO public.facility (name, price, description, quantity, photo_dir, status, id, created_at, updated_at) VALUES ('May say toc', 5000000, 'De say toc', 69, NULL, 1, 1, '2019-09-22 16:45:50.165715', '2019-09-22 16:56:54.326725');
+INSERT INTO public.facility (name, price, description, quantity, photo_dir, status, id, created_at, updated_at) VALUES ('May hap toc', 1000000, 'Dung de say toc', 6969, NULL, 1, 5, '2019-09-22 16:45:50.165715', '2019-09-22 16:59:22.709837');
 
 
 --
@@ -277,8 +269,6 @@ May hap toc	1000000	Dung de say toc	6969	\N	1	5	2019-09-22 16:45:50.165715	2019-
 -- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.product (id, name, price, description, brand_name, photo_dir, created_at, updated_at, product_category_id) FROM stdin;
-\.
 
 
 --
@@ -287,12 +277,10 @@ COPY public.product (id, name, price, description, brand_name, photo_dir, create
 -- Data for Name: product_category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.product_category (id, name, created_at, updated_at) FROM stdin;
-\.
 
 
 --
--- TOC entry 2868 (class 0 OID 0)
+-- TOC entry 2869 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: branch_branch_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -301,7 +289,7 @@ SELECT pg_catalog.setval('public.branch_branch_id_seq', 2, true);
 
 
 --
--- TOC entry 2869 (class 0 OID 0)
+-- TOC entry 2870 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: facility_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -310,7 +298,7 @@ SELECT pg_catalog.setval('public.facility_id_seq', 5, true);
 
 
 --
--- TOC entry 2870 (class 0 OID 0)
+-- TOC entry 2871 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: product_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -319,7 +307,7 @@ SELECT pg_catalog.setval('public.product_category_id_seq', 1, false);
 
 
 --
--- TOC entry 2871 (class 0 OID 0)
+-- TOC entry 2872 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -388,7 +376,7 @@ ALTER TABLE ONLY public.product
     ADD CONSTRAINT pk_product_category_id FOREIGN KEY (product_category_id) REFERENCES public.product_category(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
--- Completed on 2019-09-22 17:20:27
+-- Completed on 2019-09-22 19:40:58
 
 --
 -- PostgreSQL database dump complete
