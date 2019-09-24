@@ -6,11 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="facility")
 public class Facility {
@@ -26,6 +21,21 @@ public class Facility {
 	private int status;
 	private String photo_dir;
 	
+	public Facility(long id, String name, double price, int quantity, String description, int status,
+			String photo_dir) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.description = description;
+		this.status = status;
+		this.photo_dir = photo_dir;
+	}
+	
+	public Facility() {
+		
+	}
+
 	public long getId() {
 		return id;
 	}

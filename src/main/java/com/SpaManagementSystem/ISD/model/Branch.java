@@ -6,11 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="branch")
 public class Branch {
@@ -26,6 +21,23 @@ public class Branch {
 	private String email;
 	private String photo_dir;
 	
+	
+	
+	public Branch(long id, String name, String address, String phone_number, String description, String email,
+			String photo_dir) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.phone_number = phone_number;
+		this.description = description;
+		this.email = email;
+		this.photo_dir = photo_dir;
+	}
+	
+	public Branch() {
+		
+	}
+
 	public long getId() {
 		return id;
 	}
