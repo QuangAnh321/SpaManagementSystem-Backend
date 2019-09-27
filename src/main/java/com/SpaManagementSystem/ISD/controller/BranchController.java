@@ -1,7 +1,9 @@
 package com.SpaManagementSystem.ISD.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.SpaManagementSystem.ISD.model.Branch;
 import com.SpaManagementSystem.ISD.repository.BranchRepository;
@@ -36,30 +39,42 @@ public class BranchController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Branch> findBranchById(@PathVariable long id) {
-		return repository.findById(id).map(branch -> ResponseEntity.ok().body(branch))
-				.orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Optional<Branch>> findBranchById(@PathVariable long id) {
+		Optional<Branch> branch = repository.findById(id);
+		if (!branch.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The branch with id: "+id+" cannot be found");
+		} else {
+			return new ResponseEntity<Optional<Branch>>(branch, HttpStatus.OK);
+		}
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Branch> updateBranch(@PathVariable long id, @RequestBody Branch newBranch) {
-		return repository.findById(id).map(branch -> {
-			branch.setName(newBranch.getName());
-			branch.setPhone_number(newBranch.getPhone_number());
-			branch.setDescription(newBranch.getDescription());
-			branch.setAddress(newBranch.getAddress());
-			branch.setEmail(newBranch.getEmail());
-			branch.setPhoto_dir(newBranch.getPhoto_dir());
-			Branch updated = repository.save(branch);
-			return ResponseEntity.ok().body(updated);
-		}).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Optional<Branch>> updateBranch(@PathVariable long id, @RequestBody Branch newBranch) {
+		Optional<Branch> optionalOldBranch = repository.findById(id);
+		if (!optionalOldBranch.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The branch with id: "+id+" cannot be found");
+		} else {
+			Branch oldBranch = optionalOldBranch.get();
+			oldBranch.setName(newBranch.getName());
+			oldBranch.setPhone_number(newBranch.getPhone_number());
+			oldBranch.setDescription(newBranch.getDescription());
+			oldBranch.setAddress(newBranch.getAddress());
+			oldBranch.setEmail(newBranch.getEmail());
+			oldBranch.setPhoto_dir(newBranch.getPhoto_dir());
+			repository.save(oldBranch);
+			return new ResponseEntity<Optional<Branch>>(HttpStatus.OK);
+		}
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> delete(@PathVariable("id") long id) {
-		return repository.findById(id).map(branch -> {
-			repository.deleteById(id);
-			return ResponseEntity.ok().build();
-		}).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Object> deleteBranch(@PathVariable("id") long id) {
+		Optional<Branch> tobeDeletedBranch = repository.findById(id);
+		if (!tobeDeletedBranch.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The branch with id: "+id+" cannot be found");
+		} else {
+			Branch tobeDeleted = tobeDeletedBranch.get();
+			repository.delete(tobeDeleted);
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		}
 	}
 }
