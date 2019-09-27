@@ -7,32 +7,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="facility")
-public class Facility {
-
+@Table(name="service")
+public class Service {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
+	private long service_group_id;
+	private int code;
 	private String name;
 	private double price;
-	private int quantity;
 	private String description;
-	private int status;
 	private String photo_dir;
 	
-	public Facility(long id, String name, double price, int quantity, String description, int status,
+	public Service(long id, long service_group_id, int code, String name, double price, String description,
 			String photo_dir) {
+		super();
 		this.id = id;
+		this.service_group_id = service_group_id;
+		this.code = code;
 		this.name = name;
 		this.price = price;
-		this.quantity = quantity;
 		this.description = description;
-		this.status = status;
 		this.photo_dir = photo_dir;
 	}
 	
-	public Facility() {
+	public Service() {
 		
 	}
 
@@ -40,40 +40,53 @@ public class Facility {
 		return id;
 	}
 
+	public long getService_group_id() {
+		return service_group_id;
+	}
+
+	public void setService_group_id(long service_group_id) {
+		this.service_group_id = service_group_id;
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
+
 	public String getPhoto_dir() {
 		return photo_dir;
 	}
+
 	public void setPhoto_dir(String photo_dir) {
 		this.photo_dir = photo_dir;
-	}	
+	}
+	
+	
 }

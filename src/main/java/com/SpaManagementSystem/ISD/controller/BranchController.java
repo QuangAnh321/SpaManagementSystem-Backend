@@ -29,7 +29,7 @@ public class BranchController {
 	}
 
 	@GetMapping
-	public List<Branch> getAllFacility() {
+	public List<Branch> getAllBranch() {
 		return repository.findAll();
 	}
 
