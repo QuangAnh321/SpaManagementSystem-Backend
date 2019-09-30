@@ -38,7 +38,7 @@ public class StaffCategoryController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<StaffCategory> findStaffCategoryById(@PathVariable long id) {
+	public ResponseEntity<Optional<StaffCategory>> findStaffCategoryById(@PathVariable long id) {
 		Optional<StaffCategory> StaffCategory = repository.findById(id);
 		if (!StaffCategory.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The staff category with id: "+id+" cannot be found");
@@ -48,7 +48,7 @@ public class StaffCategoryController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<StaffCategory> updateStaffCategory(@PathVariable long id, @RequestBody StaffCategory newStaffCategory) {
+	public ResponseEntity<Optional<StaffCategory>> updateStaffCategory(@PathVariable long id, @RequestBody StaffCategory newStaffCategory) {
 		Optional<StaffCategory> optionalOldStaffCategory = repository.findById(id);
 		if (!optionalOldStaffCategory.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The staff category with id: "+id+" cannot be found");

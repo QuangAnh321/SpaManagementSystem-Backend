@@ -38,7 +38,7 @@ public class CustomerController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Customer> findCustomerById(@PathVariable long id) {
+	public ResponseEntity<Optional<Customer>> findCustomerById(@PathVariable long id) {
 		Optional<Customer> customer = repository.findById(id);
 		if (!customer.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The customer with id: "+id+" cannot be found");
@@ -48,7 +48,7 @@ public class CustomerController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable long id, @RequestBody Customer newCustomer) {
+	public ResponseEntity<Optional<Customer>> updateCustomer(@PathVariable long id, @RequestBody Customer newCustomer) {
 		Optional<Customer> optionalOldCustomer = repository.findById(id);
 		if (!optionalOldCustomer.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The customer with id: "+id+" cannot be found");

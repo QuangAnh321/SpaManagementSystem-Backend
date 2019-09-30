@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.SpaManagementSystem.ISD.model.Branch;
 import com.SpaManagementSystem.ISD.model.Facility;
 import com.SpaManagementSystem.ISD.repository.FacilityRepository;
 
@@ -39,47 +38,19 @@ public class FacilityController {
 		return repository.save(facility);
 	}
 
-//	@GetMapping("/{id}")
-//	public ResponseEntity<Facility> findFacilityById(@PathVariable long id) {
-//		return facilityRepository.findById(id).map(facility -> ResponseEntity.ok().body(facility))
-//				.orElse(ResponseEntity.notFound().build());
-////				.orElseThrow(() -> new ResourceNotFoundException("Facility with id: "+id+" Not Found"));
-//	}
-//
-//	@PutMapping("/{id}")
-//	public ResponseEntity<Facility> updateFacility(@PathVariable long id, @RequestBody Facility newFacility) {
-//		return facilityRepository.findById(id).map(facility -> {
-//			facility.setName(newFacility.getName());
-//			facility.setPrice(newFacility.getPrice());
-//			facility.setDescription(newFacility.getDescription());
-//			facility.setQuantity(newFacility.getQuantity());
-//			facility.setStatus(newFacility.getStatus());
-//			facility.setPhoto_dir(newFacility.getPhoto_dir());
-//			Facility updated = facilityRepository.save(facility);
-//			return ResponseEntity.ok().body(updated);
-//		}).orElse(ResponseEntity.notFound().build());
-//	}
-//
-//	@DeleteMapping("/{id}")
-//	public ResponseEntity<Object> delete(@PathVariable("id") long id) {
-//		return facilityRepository.findById(id).map(facility -> {
-//			facilityRepository.deleteById(id);
-//			return ResponseEntity.ok().build();
-//		}).orElse(ResponseEntity.notFound().build());
-//	}
-	
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Facility>> findBranchById(@PathVariable long id) {
-		Optional<Facility> facility = repository.findById(id);
-		if (!facility.isPresent()) {
+	public ResponseEntity<Facility> findBranchById(@PathVariable long id) {
+		Optional<Facility> optionalFacility = repository.findById(id);
+		if (!optionalFacility.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The facility with id: "+id+" cannot be found");
 		} else {
-			return new ResponseEntity<Optional<Facility>>(facility, HttpStatus.OK);
+			Facility facility = optionalFacility.get();
+			return new ResponseEntity<Facility>(facility, HttpStatus.OK);
 		}
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Optional<Facility>> updateFacility(@PathVariable long id, @RequestBody Facility newFacility) {
+	public ResponseEntity<Facility> updateFacility(@PathVariable long id, @RequestBody Facility newFacility) {
 		Optional<Facility> optionalOldFacility = repository.findById(id);
 		if (!optionalOldFacility.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The facility with id: "+id+" cannot be found");
@@ -92,7 +63,7 @@ public class FacilityController {
 			oldFacility.setQuantity(newFacility.getQuantity());
 			oldFacility.setStatus(newFacility.getStatus());
 			repository.save(oldFacility);
-			return new ResponseEntity<Optional<Facility>>(HttpStatus.OK);
+			return new ResponseEntity<Facility>(HttpStatus.OK);
 		}
 	}
 

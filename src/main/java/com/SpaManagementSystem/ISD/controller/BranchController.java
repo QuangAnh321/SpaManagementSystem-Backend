@@ -39,17 +39,18 @@ public class BranchController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Branch>> findBranchById(@PathVariable long id) {
-		Optional<Branch> branch = repository.findById(id);
-		if (!branch.isPresent()) {
+	public ResponseEntity<Branch> findBranchById(@PathVariable long id) {
+		Optional<Branch> optionalBranch = repository.findById(id);
+		if (!optionalBranch.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The branch with id: "+id+" cannot be found");
 		} else {
-			return new ResponseEntity<Optional<Branch>>(branch, HttpStatus.OK);
+			Branch branch = optionalBranch.get();
+			return new ResponseEntity<Branch>(branch, HttpStatus.OK);
 		}
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Optional<Branch>> updateBranch(@PathVariable long id, @RequestBody Branch newBranch) {
+	public ResponseEntity<Branch> updateBranch(@PathVariable long id, @RequestBody Branch newBranch) {
 		Optional<Branch> optionalOldBranch = repository.findById(id);
 		if (!optionalOldBranch.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The branch with id: "+id+" cannot be found");
@@ -62,7 +63,7 @@ public class BranchController {
 			oldBranch.setEmail(newBranch.getEmail());
 			oldBranch.setPhoto_dir(newBranch.getPhoto_dir());
 			repository.save(oldBranch);
-			return new ResponseEntity<Optional<Branch>>(HttpStatus.OK);
+			return new ResponseEntity<Branch>(HttpStatus.OK);
 		}
 	}
 
