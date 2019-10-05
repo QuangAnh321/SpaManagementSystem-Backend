@@ -74,34 +74,35 @@ public class ProductController {
 		}
 	}
 	
-	@PutMapping("/v1/product_category/{category_id}/product/{product_id}")
-	public ResponseEntity<Product> updateProduct(@PathVariable("product_id") long productId, @PathVariable("category_id") long productCategoryId, @RequestBody Product newProduct, @RequestParam(name="newProductCategoryId", required=false) Long newProductCategoryId) {
+	@PutMapping("/v1/product/{product_id}")
+	public ResponseEntity<Product> updateProduct(@PathVariable("product_id") long productId,  @RequestBody Product newProduct) {
 		Optional<Product> optionalOldProduct = productRepository.findById(productId);
-		Optional<ProductCategory> optionalOldProductCategory = productCategoryRepository.findById(productCategoryId);
-		if(!optionalOldProductCategory.isPresent()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The product category with id: "+productCategoryId+" cannot be found");
-		} else if(!optionalOldProduct.isPresent()) {
+		if(!optionalOldProduct.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The product with id: "+productId+" cannot be found");
 		} else {
 			Product oldProduct = optionalOldProduct.get();
 			oldProduct.setName(newProduct.getName());
 			oldProduct.setPhoto_dir(newProduct.getPhoto_dir());
 			oldProduct.setPrice(newProduct.getPrice());
-			oldProduct.setBrand_name(newProduct.getBrand_name());
 			oldProduct.setDescription(newProduct.getDescription());
-			if(!Objects.isNull(newProductCategoryId)) {
-				Optional<ProductCategory> optionalNewProductCategory = productCategoryRepository.findById(newProductCategoryId);
-				if(!optionalNewProductCategory.isPresent()) {
-					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The product category with id: "+newProductCategoryId+" cannot be found");
-				} else {
-					ProductCategory newProductCategory =  optionalNewProductCategory.get();
-					oldProduct.setProductCategory(newProductCategory);
-				}
-			}
+			oldProduct.setProductCategory(newProduct.getProductCategory());
+//			if(!Objects.isNull(newProductCategoryId)) {
+//				Optional<ProductCategory> optionalNewProductCategory = productCategoryRepository.findById(newProductCategoryId);
+//				if(!optionalNewProductCategory.isPresent()) {
+//					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The product category with id: "+newProductCategoryId+" cannot be found");
+//				} else {
+//					ProductCategory newProductCategory =  optionalNewProductCategory.get();
+//					oldProduct.setProductCategory(newProductCategory);
+//				}
+//			}
 			productRepository.save(oldProduct);
 			return new ResponseEntity<Product>(HttpStatus.OK);
 		}
 	}
+	
+//	public ResponseEntity<Product> updateProduct() {
+//		
+//	}
 	
 	@DeleteMapping("/v1/product_category/{category_id}/product/{product_id}")
 	public ResponseEntity<Object> deleteProduct(@PathVariable("product_id") long productId, @PathVariable("category_id") long productCategoryId) {

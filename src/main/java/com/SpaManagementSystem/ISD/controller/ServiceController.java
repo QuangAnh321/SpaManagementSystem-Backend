@@ -39,30 +39,31 @@ public class ServiceController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Service>> findServiceById(@PathVariable long id) {
-		Optional<Service> Service = repository.findById(id);
-		if (!Service.isPresent()) {
+	public ResponseEntity<Service> findServiceById(@PathVariable long id) {
+		Optional<Service> optionalService = repository.findById(id);
+		if (!optionalService.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Service with id: "+id+" cannot be found");
 		} else {
-			return new ResponseEntity<Optional<Service>>(Service, HttpStatus.OK);
+			Service service = optionalService.get();
+			return new ResponseEntity<Service>(service, HttpStatus.OK);
 		}
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Optional<Service>> updateService(@PathVariable long id, @RequestBody Service newService) {
+	public ResponseEntity<Service> updateService(@PathVariable long id, @RequestBody Service newService) {
 		Optional<Service> optionalOldService = repository.findById(id);
 		if (!optionalOldService.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Service with id: "+id+" cannot be found");
 		} else {
 			Service oldService = optionalOldService.get();
-            oldService.setService_group_id(newService.getService_group_id());
-            oldService.setCode(newService.getCode());
             oldService.setPrice(newService.getPrice());
 			oldService.setName(newService.getName());
 			oldService.setDescription(newService.getDescription());
 			oldService.setPhoto_dir(newService.getPhoto_dir());
+			oldService.setTime(newService.getTime());
+			oldService.setServiceGroup(newService.getServiceGroup());
 			repository.save(oldService);
-			return new ResponseEntity<Optional<Service>>(HttpStatus.OK);
+			return new ResponseEntity<Service>(HttpStatus.OK);
 		}
 	}
 

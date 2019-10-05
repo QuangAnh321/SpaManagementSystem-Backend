@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
 @Table(name="product")
@@ -24,22 +22,27 @@ public class Product {
 	private String name;
 	private double price;
 	private String description;
-	private String brand_name;
 	private String photo_dir;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="product_category_id")
 	private ProductCategory productCategory;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="product_brand_id")
+	private ProductBrand productBrand;
 	
-	public Product(long id, String name, double price, String description, String brand_name, String photo_dir, ProductCategory productCategory) {
+	
+	
+	public Product(long id, String name, double price, String description, String brand_name, String photo_dir, 
+			ProductCategory productCategory, ProductBrand productBrand) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.description = description;
-		this.brand_name = brand_name;
 		this.photo_dir = photo_dir;
 		this.productCategory = productCategory;
+		this.productBrand = productBrand;
 	}
 	
 	public Product() {
@@ -64,12 +67,7 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getBrand_name() {
-		return brand_name;
-	}
-	public void setBrand_name(String brand_name) {
-		this.brand_name = brand_name;
-	}
+	
 	public String getPhoto_dir() {
 		return photo_dir;
 	}
@@ -86,6 +84,14 @@ public class Product {
 
 	public void setProductCategory(ProductCategory productCategory) {
 		this.productCategory = productCategory;
+	}
+
+	public ProductBrand getProductBrand() {
+		return productBrand;
+	}
+
+	public void setProductBrand(ProductBrand productBrand) {
+		this.productBrand = productBrand;
 	}
 	
 	

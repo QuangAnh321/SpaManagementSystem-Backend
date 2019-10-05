@@ -8,34 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="service_group")
-public class ServiceGroup {
-	
+@Table(name="product_brand")
+public class ProductBrand {
+
 	@Id
-	@Column(name="service_group_id")
+	@Column(name="product_brand_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	
 	private String name;
-
-	public ServiceGroup(long id, String name) {
+	
+	public ProductBrand() {
+		
+	}
+	
+	public ProductBrand(long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
-	
-	public ServiceGroup() {
-		
-	}
-
-	public long getId() {
-		return id;
-	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
+	public long getId() {
+		return id;
+	}
+	
 }

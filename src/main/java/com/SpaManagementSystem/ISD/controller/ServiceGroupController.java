@@ -38,17 +38,18 @@ public class ServiceGroupController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<ServiceGroup>> findServiceGroupById(@PathVariable long id) {
-		Optional<ServiceGroup> serviceGroup = repository.findById(id);
-		if (!serviceGroup.isPresent()) {
+	public ResponseEntity<ServiceGroup> findServiceGroupById(@PathVariable long id) {
+		Optional<ServiceGroup> optionalServiceGroup = repository.findById(id);
+		if (!optionalServiceGroup.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The service group with id: "+id+" cannot be found");
 		} else {
-			return new ResponseEntity<Optional<ServiceGroup>>(serviceGroup, HttpStatus.OK);
+			ServiceGroup serviceGroup = optionalServiceGroup.get();
+			return new ResponseEntity<ServiceGroup>(serviceGroup, HttpStatus.OK);
 		}
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Optional<ServiceGroup>> updateServiceGroup(@PathVariable long id, @RequestBody ServiceGroup newServiceGroup) {
+	public ResponseEntity<ServiceGroup> updateServiceGroup(@PathVariable long id, @RequestBody ServiceGroup newServiceGroup) {
 		Optional<ServiceGroup> optionalOldServiceGroup = repository.findById(id);
 		if (!optionalOldServiceGroup.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The service group with id: "+id+" cannot be found");
@@ -56,7 +57,7 @@ public class ServiceGroupController {
 			ServiceGroup oldServiceGroup = optionalOldServiceGroup.get();
 			oldServiceGroup.setName(newServiceGroup.getName());
 			repository.save(oldServiceGroup);
-			return new ResponseEntity<Optional<ServiceGroup>>(HttpStatus.OK);
+			return new ResponseEntity<ServiceGroup>(HttpStatus.OK);
 		}
 	}
 
