@@ -1,5 +1,6 @@
 package com.SpaManagementSystem.ISD.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,13 +12,13 @@ import javax.persistence.Table;
 public class StaffCategory {
 
 	@Id
+	@Column(name="staff_category_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
 	private String name;
 
 	public StaffCategory(long id, String name) {
-		super();
 		this.id = id;
 		this.name = name;
 	}

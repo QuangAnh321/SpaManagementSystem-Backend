@@ -3,6 +3,7 @@ package com.SpaManagementSystem.ISD.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +30,7 @@ public class StaffCategoryController {
 
 	@GetMapping
 	public List<StaffCategory> getAllStaffCategory() {
-		return repository.findAll();
+		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping
@@ -38,17 +39,18 @@ public class StaffCategoryController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<StaffCategory>> findStaffCategoryById(@PathVariable long id) {
-		Optional<StaffCategory> StaffCategory = repository.findById(id);
-		if (!StaffCategory.isPresent()) {
+	public ResponseEntity<StaffCategory> findStaffCategoryById(@PathVariable long id) {
+		Optional<StaffCategory> optionalStaffCategory = repository.findById(id);
+		if (!optionalStaffCategory.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The staff category with id: "+id+" cannot be found");
 		} else {
-			return new ResponseEntity<Optional<StaffCategory>>(StaffCategory, HttpStatus.OK);
+			StaffCategory staffCategory = optionalStaffCategory.get();
+			return new ResponseEntity<StaffCategory>(staffCategory, HttpStatus.OK);
 		}
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Optional<StaffCategory>> updateStaffCategory(@PathVariable long id, @RequestBody StaffCategory newStaffCategory) {
+	public ResponseEntity<StaffCategory> updateStaffCategory(@PathVariable long id, @RequestBody StaffCategory newStaffCategory) {
 		Optional<StaffCategory> optionalOldStaffCategory = repository.findById(id);
 		if (!optionalOldStaffCategory.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The staff category with id: "+id+" cannot be found");
@@ -56,7 +58,7 @@ public class StaffCategoryController {
 			StaffCategory oldStaffCategory = optionalOldStaffCategory.get();
 			oldStaffCategory.setName(newStaffCategory.getName());
 			repository.save(oldStaffCategory);
-			return new ResponseEntity<Optional<StaffCategory>>(HttpStatus.OK);
+			return new ResponseEntity<StaffCategory>(HttpStatus.OK);
 		}
 	}
 
