@@ -1,38 +1,41 @@
 package com.SpaManagementSystem.ISD.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "customer_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	private String name;
-	private String gender;
-	private String phone;
+	private String phone_number;
 	private String email;
 	private String address;
-	private String photo_dir;
+
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 	
-	public Customer(long id, String name, String gender, String phone, String email, String address, String photo_dir) {
-		super();
+	public Customer(long id, String name, Gender gender, String phone_number, String email, String address) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
-		this.phone = phone;
+		this.phone_number = phone_number;
 		this.email = email;
 		this.address = address;
-		this.photo_dir = photo_dir;
 	}
-	
+
 	public Customer() {
-		
+
 	}
 
 	public long getId() {
@@ -47,20 +50,22 @@ public class Customer {
 		this.name = name;
 	}
 
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
-	public String getPhone() {
-		return phone;
+	
+
+	public String getPhone_number() {
+		return phone_number;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
 	}
 
 	public String getEmail() {
@@ -79,13 +84,4 @@ public class Customer {
 		this.address = address;
 	}
 
-	public String getPhoto_dir() {
-		return photo_dir;
-	}
-
-	public void setPhoto_dir(String photo_dir) {
-		this.photo_dir = photo_dir;
-	}
-	
-	
 }
