@@ -3,6 +3,7 @@ package com.SpaManagementSystem.ISD.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +20,7 @@ import com.SpaManagementSystem.ISD.model.ProductCategory;
 import com.SpaManagementSystem.ISD.repository.ProductCategoryRepository;
 
 @RestController
-@RequestMapping("/v1/product_category")
+@RequestMapping("/v1/product-category")
 public class ProductCategoryController {
 
 	private ProductCategoryRepository repository;
@@ -30,7 +31,7 @@ public class ProductCategoryController {
 
 	@GetMapping
 	public List<ProductCategory> getAllProductCategory() {
-		return repository.findAll();
+		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping

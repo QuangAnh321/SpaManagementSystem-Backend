@@ -20,29 +20,25 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	private double price;
 	private String description;
 	private String photo_dir;
+	private String brand;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="product_category_id")
 	private ProductCategory productCategory;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="product_brand_id")
-	private ProductBrand productBrand;
 	
 	
 	
-	public Product(long id, String name, double price, String description, String brand_name, String photo_dir, 
-			ProductCategory productCategory, ProductBrand productBrand) {
+	public Product(long id, String name, String description, String brand_name, String photo_dir, 
+			ProductCategory productCategory, String brand) {
 		this.id = id;
 		this.name = name;
-		this.price = price;
 		this.description = description;
 		this.photo_dir = photo_dir;
 		this.productCategory = productCategory;
-		this.productBrand = productBrand;
+		this.brand = brand;
 	}
 	
 	public Product() {
@@ -55,12 +51,7 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -86,13 +77,13 @@ public class Product {
 		this.productCategory = productCategory;
 	}
 
-	public ProductBrand getProductBrand() {
-		return productBrand;
+	public String getBrand() {
+		return brand;
 	}
 
-	public void setProductBrand(ProductBrand productBrand) {
-		this.productBrand = productBrand;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
-	
+
 	
 }
