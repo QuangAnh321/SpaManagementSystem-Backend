@@ -8,11 +8,15 @@ An API that provides data for a web application that manages a Spa
 ## Screenshots
 - Updating
 
-## Technologies
+## Technologies and tools
 
-<b>Built with</b>
+<b>Technologies</b>
 - [SpringFramework](https://spring.io/)
 - [PostgresSQL](https://www.postgresql.org/)
+
+<b>Tools</b>
+- [Postman](https://www.getpostman.com/): For API testing
+- [Heroku](https://www.heroku.com/): For deployment
 
 ## Features
 - Updating
