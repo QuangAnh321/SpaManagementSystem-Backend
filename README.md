@@ -3,7 +3,8 @@ An API provides data for a web application that manages a Spa
 
 ## Motivation
 - This repository serves as part the Final project of my Information System Design (ISD) course at Hanoi University
-- The project is live at: https://warm-hollows-70049.herokuapp.com/
+- API avaliable at: https://spa-management-system.herokuapp.com/v1/
+- The web application is live at: https://warm-hollows-70049.herokuapp.com/
 
 ## Features
 - Updating
@@ -11,9 +12,8 @@ An API provides data for a web application that manages a Spa
 ## Installation
 - Updating
 
-## How to use?
-- API avaliable at: https://spa-management-system.herokuapp.com/v1/
-- API endpoints: Updating
+## API Endpoints
+- Updating
 
 ## Technologies and tools
 
