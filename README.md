@@ -1,5 +1,4 @@
-## Project title
-Spa Management System (Backend)
+## Spa Management System (Backend)
 
 ## Motivation
 - This repository serves as part the Final project of my Information System Design (ISD) course at Hanoi University
