@@ -28,22 +28,12 @@ public class ProductController {
 	}
 
 	@GetMapping("/v1/product")
-	public List<Product> getAllProduct() {
+	public List<Product> getAll() {
 		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
-//	@GetMapping("/v1/product/{id}")
-//	public List<Product> getAllProductByProductCategory(@PathVariable Long id) {
-//		Optional<ProductCategory> optionalProductCategory = productCategoryRepository.findById(id);
-//		if(!optionalProductCategory.isPresent()) {
-//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The product category with id: "+id+" cannot be found");
-//		}
-//		List<Product> productList = productRepository.findAllByProductCategoryId(id);
-//		return productList;
-//	}
-
 	@GetMapping("/v1/product/{id}")
-	public ResponseEntity<Product> getProductById(@PathVariable("id") long productId) {
+	public ResponseEntity<Product> getById(@PathVariable("id") long productId) {
 		Optional<Product> optionalProduct = repository.findById(productId);
 		if (!optionalProduct.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -55,12 +45,12 @@ public class ProductController {
 	}
 
 	@PostMapping("/v1/product/")
-	public Product createProduct(@RequestBody Product product) {
+	public Product create(@RequestBody Product product) {
 		return repository.save(product);
 	}
 
 	@PutMapping("/v1/product/{id}")
-	public ResponseEntity<Product> updateProduct(@PathVariable("id") long productId, @RequestBody Product newProduct) {
+	public ResponseEntity<Product> update(@PathVariable("id") long productId, @RequestBody Product newProduct) {
 		Optional<Product> optionalOldProduct = repository.findById(productId);
 		if (!optionalOldProduct.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -78,7 +68,7 @@ public class ProductController {
 	}
 
 	@DeleteMapping("/v1/product/{id}")
-	public ResponseEntity<Object> deleteProduct(@PathVariable("id") long productId) {
+	public ResponseEntity<Object> delete(@PathVariable("id") long productId) {
 		Optional<Product> tobeDeletedProduct = repository.findById(productId);
 		if (!tobeDeletedProduct.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,

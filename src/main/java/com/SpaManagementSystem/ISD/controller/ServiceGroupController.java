@@ -29,17 +29,17 @@ public class ServiceGroupController {
 	}
 
 	@GetMapping
-	public List<ServiceGroup> getAllServiceGroup() {
+	public List<ServiceGroup> getAll() {
 		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping
-	public ServiceGroup createServiceGroup(@RequestBody ServiceGroup serviceGroup) {
+	public ServiceGroup create(@RequestBody ServiceGroup serviceGroup) {
 		return repository.save(serviceGroup);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ServiceGroup> findServiceGroupById(@PathVariable long id) {
+	public ResponseEntity<ServiceGroup> findById(@PathVariable long id) {
 		Optional<ServiceGroup> optionalServiceGroup = repository.findById(id);
 		if (!optionalServiceGroup.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The service group with id: "+id+" cannot be found");
@@ -50,7 +50,7 @@ public class ServiceGroupController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ServiceGroup> updateServiceGroup(@PathVariable long id, @RequestBody ServiceGroup newServiceGroup) {
+	public ResponseEntity<ServiceGroup> update(@PathVariable long id, @RequestBody ServiceGroup newServiceGroup) {
 		Optional<ServiceGroup> optionalOldServiceGroup = repository.findById(id);
 		if (!optionalOldServiceGroup.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The service group with id: "+id+" cannot be found");

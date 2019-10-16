@@ -29,17 +29,17 @@ public class FacilityController {
 	}
 
 	@GetMapping
-	public List<Facility> getAllFacility() {
+	public List<Facility> getAll() {
 		return repository.findAll();
 	}
 
 	@PostMapping
-	public Facility createFacility(@RequestBody Facility facility) {
+	public Facility create(@RequestBody Facility facility) {
 		return repository.save(facility);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Facility> findBranchById(@PathVariable long id) {
+	public ResponseEntity<Facility> findById(@PathVariable long id) {
 		Optional<Facility> optionalFacility = repository.findById(id);
 		if (!optionalFacility.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The facility with id: "+id+" cannot be found");
@@ -50,7 +50,7 @@ public class FacilityController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Facility> updateFacility(@PathVariable long id, @RequestBody Facility newFacility) {
+	public ResponseEntity<Facility> update(@PathVariable long id, @RequestBody Facility newFacility) {
 		Optional<Facility> optionalOldFacility = repository.findById(id);
 		if (!optionalOldFacility.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The facility with id: "+id+" cannot be found");
@@ -68,7 +68,7 @@ public class FacilityController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteFacility(@PathVariable("id") long id) {
+	public ResponseEntity<Object> delete(@PathVariable("id") long id) {
 		Optional<Facility> tobeDeletedFacility = repository.findById(id);
 		if (!tobeDeletedFacility.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The facility with id: "+id+" cannot be found");

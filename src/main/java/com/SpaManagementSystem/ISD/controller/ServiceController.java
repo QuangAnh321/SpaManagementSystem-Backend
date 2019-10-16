@@ -30,17 +30,17 @@ public class ServiceController {
 	}
 
 	@GetMapping
-	public List<Service> getAllService() {
+	public List<Service> getAll() {
 		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping
-	public Service createService(@RequestBody Service Service) {
+	public Service create(@RequestBody Service Service) {
 		return repository.save(Service);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Service> findServiceById(@PathVariable long id) {
+	public ResponseEntity<Service> findById(@PathVariable long id) {
 		Optional<Service> optionalService = repository.findById(id);
 		if (!optionalService.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Service with id: "+id+" cannot be found");
@@ -51,7 +51,7 @@ public class ServiceController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Service> updateService(@PathVariable long id, @RequestBody Service newService) {
+	public ResponseEntity<Service> update(@PathVariable long id, @RequestBody Service newService) {
 		Optional<Service> optionalOldService = repository.findById(id);
 		if (!optionalOldService.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Service with id: "+id+" cannot be found");
@@ -69,7 +69,7 @@ public class ServiceController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteService(@PathVariable("id") long id) {
+	public ResponseEntity<Object> delete(@PathVariable("id") long id) {
 		Optional<Service> tobeDeletedService = repository.findById(id);
 		if (!tobeDeletedService.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Service with id: "+id+" cannot be found");

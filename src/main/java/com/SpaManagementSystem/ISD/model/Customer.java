@@ -17,6 +17,7 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	// Use @Pattern(regexp="") for validate using regex
 	private String name;
 	private String phone_number;
 	private String email;

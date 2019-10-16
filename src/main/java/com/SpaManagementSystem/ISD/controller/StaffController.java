@@ -30,17 +30,17 @@ public class StaffController {
 	}
 
 	@GetMapping
-	public List<Staff> getAllStaff() {
+	public List<Staff> getAll() {
 		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping
-	public Staff createStaff(@RequestBody Staff staff) {
+	public Staff create(@RequestBody Staff staff) {
 		return repository.save(staff);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Staff> findStaffById(@PathVariable long id) {
+	public ResponseEntity<Staff> findById(@PathVariable long id) {
 		Optional<Staff> optionalStaff = repository.findById(id);
 		if (!optionalStaff.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Staff with id: "+id+" cannot be found");
@@ -51,7 +51,7 @@ public class StaffController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Staff> updateStaff(@PathVariable long id, @RequestBody Staff newStaff) {
+	public ResponseEntity<Staff> update(@PathVariable long id, @RequestBody Staff newStaff) {
 		Optional<Staff> optionalOldStaff = repository.findById(id);
 		if (!optionalOldStaff.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Staff with id: "+id+" cannot be found");
@@ -69,7 +69,7 @@ public class StaffController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteService(@PathVariable("id") long id) {
+	public ResponseEntity<Object> delete(@PathVariable("id") long id) {
 		Optional<Staff> tobeDeletedStaff = repository.findById(id);
 		if (!tobeDeletedStaff.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Staff with id: "+id+" cannot be found");

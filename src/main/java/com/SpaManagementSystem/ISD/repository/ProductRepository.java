@@ -10,5 +10,6 @@ import com.SpaManagementSystem.ISD.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+	// Currently not in use
 	public List<Product> findAllByProductCategoryId(Long product_category_id);
 }

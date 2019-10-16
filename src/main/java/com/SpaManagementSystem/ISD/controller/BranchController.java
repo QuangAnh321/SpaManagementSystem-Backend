@@ -29,17 +29,17 @@ public class BranchController {
 	}
 
 	@GetMapping
-	public List<Branch> getAllBranch() {
+	public List<Branch> getAll() {
 		return repository.findAll();
 	}
 
 	@PostMapping
-	public Branch createBranch(@RequestBody Branch branch) {
+	public Branch create(@RequestBody Branch branch) {
 		return repository.save(branch);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Branch> findBranchById(@PathVariable long id) {
+	public ResponseEntity<Branch> findById(@PathVariable long id) {
 		Optional<Branch> optionalBranch = repository.findById(id);
 		if (!optionalBranch.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The branch with id: "+id+" cannot be found");
@@ -50,7 +50,7 @@ public class BranchController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Branch> updateBranch(@PathVariable long id, @RequestBody Branch newBranch) {
+	public ResponseEntity<Branch> update(@PathVariable long id, @RequestBody Branch newBranch) {
 		Optional<Branch> optionalOldBranch = repository.findById(id);
 		if (!optionalOldBranch.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The branch with id: "+id+" cannot be found");
@@ -68,7 +68,7 @@ public class BranchController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteBranch(@PathVariable("id") long id) {
+	public ResponseEntity<Object> delete(@PathVariable("id") long id) {
 		Optional<Branch> tobeDeletedBranch = repository.findById(id);
 		if (!tobeDeletedBranch.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The branch with id: "+id+" cannot be found");

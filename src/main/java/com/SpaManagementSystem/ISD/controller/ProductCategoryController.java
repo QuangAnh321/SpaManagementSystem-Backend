@@ -30,17 +30,17 @@ public class ProductCategoryController {
 	}
 
 	@GetMapping
-	public List<ProductCategory> getAllProductCategory() {
+	public List<ProductCategory> getAll() {
 		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping
-	public ProductCategory createProductCategory(@RequestBody ProductCategory productCategory) {
+	public ProductCategory create(@RequestBody ProductCategory productCategory) {
 		return repository.save(productCategory);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ProductCategory> findProductCategoryById(@PathVariable long id) {
+	public ResponseEntity<ProductCategory> findById(@PathVariable long id) {
 		Optional<ProductCategory> optionalProductCategory = repository.findById(id);
 		if (!optionalProductCategory.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The product category with id: "+id+" cannot be found");
@@ -51,7 +51,7 @@ public class ProductCategoryController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ProductCategory> updateProductCategory(@PathVariable long id, @RequestBody ProductCategory newProductCategory) {
+	public ResponseEntity<ProductCategory> update(@PathVariable long id, @RequestBody ProductCategory newProductCategory) {
 		Optional<ProductCategory> optionalOldProductCategory = repository.findById(id);
 		if (!optionalOldProductCategory.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The product category with id: "+id+" cannot be found");
@@ -64,7 +64,7 @@ public class ProductCategoryController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteProductCategory(@PathVariable("id") long id) {
+	public ResponseEntity<Object> delete(@PathVariable("id") long id) {
 		Optional<ProductCategory> tobeDeletedProductCategory = repository.findById(id);
 		if (!tobeDeletedProductCategory.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The product category with id: "+id+" cannot be found");
