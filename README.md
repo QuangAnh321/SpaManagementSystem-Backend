@@ -1,4 +1,5 @@
-## Spa Management System (Backend)
+## Spa Management System (Backend API)
+An API that provides data for a web application that manages a Spa 
 
 ## Motivation
 - This repository serves as part the Final project of my Information System Design (ISD) course at Hanoi University
