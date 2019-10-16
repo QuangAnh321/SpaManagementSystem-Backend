@@ -1,12 +1,19 @@
 ## Spa Management System (Backend API)
-An API that provides data for a web application that manages a Spa 
+An API provides data for a web application that manages a Spa 
 
 ## Motivation
 - This repository serves as part the Final project of my Information System Design (ISD) course at Hanoi University
 - The project is live at: https://warm-hollows-70049.herokuapp.com/
- 
-## Screenshots
+
+## Features
 - Updating
+
+## Installation
+- Updating
+
+## How to use?
+- API avaliable at: https://spa-management-system.herokuapp.com/v1/
+- API endpoints: Updating
 
 ## Technologies and tools
 
@@ -17,16 +24,6 @@ An API that provides data for a web application that manages a Spa
 <b>Tools</b>
 - [Postman](https://www.getpostman.com/): For API testing
 - [Heroku](https://www.heroku.com/): For deployment
-
-## Features
-- Updating
-
-## Installation
-- Updating
-
-## How to use?
-- Project avaliable at: https://spa-management-system.herokuapp.com/v1/
-- Api endpoints: Updating
 
 ## Credits
 My team members
