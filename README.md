@@ -2,8 +2,8 @@
 Spa Management System (Backend)
 
 ## Motivation
-This repository serves as part the Final project of my Information System Design (ISD) course at Hanoi University
-The project is live at: https://warm-hollows-70049.herokuapp.com/
+- This repository serves as part the Final project of my Information System Design (ISD) course at Hanoi University
+- The project is live at: https://warm-hollows-70049.herokuapp.com/
  
 ## Screenshots
 - Updating
