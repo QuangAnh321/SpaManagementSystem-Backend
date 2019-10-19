@@ -3,6 +3,7 @@ package com.SpaManagementSystem.ISD.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +31,7 @@ public class EquipmentController {
 
 	@GetMapping
 	public List<Equipment> getAll() {
-		return repository.findAll();
+		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping

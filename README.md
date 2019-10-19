@@ -1,18 +1,10 @@
-## Project title
-Spa Management System (Backend)
+## Spa Management System (Backend API)
+An API provides data for a web application that manages a Spa 
 
 ## Motivation
-This repository serves as part the Final project of my Information System Design (ISD) course at Hanoi University
-The project is live at: https://warm-hollows-70049.herokuapp.com/
- 
-## Screenshots
-- Updating
-
-## Technologies
-
-<b>Built with</b>
-- [SpringFramework](https://spring.io/)
-- [PostgresSQL](https://www.postgresql.org/)
+- This repository serves as part the Final project of my Information System Design (ISD) course at Hanoi University
+- API avaliable at: https://spa-management-system.herokuapp.com/v1/
+- The web application is live at: https://warm-hollows-70049.herokuapp.com/
 
 ## Features
 - Updating
@@ -20,9 +12,18 @@ The project is live at: https://warm-hollows-70049.herokuapp.com/
 ## Installation
 - Updating
 
-## How to use?
-- Project avaliable at: https://spa-management-system.herokuapp.com/v1/
-- Api endpoints: Updating
+## API Endpoints
+- Updating
+
+## Technologies and tools
+
+<b>Technologies</b>
+- [SpringFramework](https://spring.io/)
+- [PostgresSQL](https://www.postgresql.org/)
+
+<b>Tools</b>
+- [Postman](https://www.getpostman.com/): For API testing
+- [Heroku](https://www.heroku.com/): For deployment
 
 ## Credits
 My team members
