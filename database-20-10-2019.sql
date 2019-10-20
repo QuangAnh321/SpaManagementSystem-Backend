@@ -5,7 +5,7 @@
 -- Dumped from database version 11.5
 -- Dumped by pg_dump version 11.5
 
--- Started on 2019-10-19 12:28:03
+-- Started on 2019-10-20 23:32:29
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,24 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3 (class 2615 OID 2200)
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
-CREATE SCHEMA public;
-
-
---
--- TOC entry 3023 (class 0 OID 0)
--- Dependencies: 3
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
-
---
--- TOC entry 224 (class 1255 OID 16451)
+-- TOC entry 226 (class 1255 OID 16451)
 -- Name: set_updated_timestamp(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -53,6 +36,48 @@ $$;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- TOC entry 225 (class 1259 OID 16702)
+-- Name: booking; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.booking (
+    booking_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    phone_number character varying(255) NOT NULL,
+    "time" character varying(255) NOT NULL,
+    email character varying(255),
+    address character varying(255),
+    description text,
+    service_id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_at timestamp without time zone DEFAULT now()
+);
+
+
+--
+-- TOC entry 224 (class 1259 OID 16700)
+-- Name: booking_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.booking_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3039 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: booking_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.booking_id_seq OWNED BY public.booking.booking_id;
+
 
 --
 -- TOC entry 196 (class 1259 OID 16452)
@@ -87,7 +112,7 @@ CREATE SEQUENCE public.branch_branch_id_seq
 
 
 --
--- TOC entry 3024 (class 0 OID 0)
+-- TOC entry 3040 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: branch_branch_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -130,7 +155,7 @@ CREATE SEQUENCE public.coupon_coupon_id_seq
 
 
 --
--- TOC entry 3025 (class 0 OID 0)
+-- TOC entry 3041 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: coupon_coupon_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -170,7 +195,7 @@ CREATE SEQUENCE public.customer_customer_id_seq
 
 
 --
--- TOC entry 3026 (class 0 OID 0)
+-- TOC entry 3042 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: customer_customer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -224,7 +249,7 @@ CREATE SEQUENCE public.equipment_category_id_seq
 
 
 --
--- TOC entry 3027 (class 0 OID 0)
+-- TOC entry 3043 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: equipment_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -247,7 +272,7 @@ CREATE SEQUENCE public.equipment_equipment_id_seq
 
 
 --
--- TOC entry 3028 (class 0 OID 0)
+-- TOC entry 3044 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: equipment_equipment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -288,7 +313,7 @@ CREATE SEQUENCE public.facility_id_seq
 
 
 --
--- TOC entry 3029 (class 0 OID 0)
+-- TOC entry 3045 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: facility_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -341,7 +366,7 @@ CREATE SEQUENCE public.product_category_id_seq
 
 
 --
--- TOC entry 3030 (class 0 OID 0)
+-- TOC entry 3046 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: product_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -364,7 +389,7 @@ CREATE SEQUENCE public.product_id_seq
 
 
 --
--- TOC entry 3031 (class 0 OID 0)
+-- TOC entry 3047 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -418,7 +443,7 @@ CREATE SEQUENCE public.service_group_id_seq
 
 
 --
--- TOC entry 3032 (class 0 OID 0)
+-- TOC entry 3048 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: service_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -441,7 +466,7 @@ CREATE SEQUENCE public.service_service_id_seq
 
 
 --
--- TOC entry 3033 (class 0 OID 0)
+-- TOC entry 3049 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: service_service_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -495,7 +520,7 @@ CREATE SEQUENCE public.staff_category_staff_category_id_seq
 
 
 --
--- TOC entry 3034 (class 0 OID 0)
+-- TOC entry 3050 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: staff_category_staff_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -518,7 +543,7 @@ CREATE SEQUENCE public.staff_id_seq
 
 
 --
--- TOC entry 3035 (class 0 OID 0)
+-- TOC entry 3051 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: staff_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -571,7 +596,7 @@ CREATE SEQUENCE public.supplier_category_supplier_id_seq
 
 
 --
--- TOC entry 3036 (class 0 OID 0)
+-- TOC entry 3052 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: supplier_category_supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -594,7 +619,7 @@ CREATE SEQUENCE public.supplier_id_seq
 
 
 --
--- TOC entry 3037 (class 0 OID 0)
+-- TOC entry 3053 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -603,7 +628,15 @@ ALTER SEQUENCE public.supplier_id_seq OWNED BY public.supplier.supplier_id;
 
 
 --
--- TOC entry 2775 (class 2604 OID 16489)
+-- TOC entry 2824 (class 2604 OID 16705)
+-- Name: booking booking_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.booking ALTER COLUMN booking_id SET DEFAULT nextval('public.booking_id_seq'::regclass);
+
+
+--
+-- TOC entry 2782 (class 2604 OID 16489)
 -- Name: branch id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -611,7 +644,7 @@ ALTER TABLE ONLY public.branch ALTER COLUMN id SET DEFAULT nextval('public.branc
 
 
 --
--- TOC entry 2806 (class 2604 OID 16646)
+-- TOC entry 2813 (class 2604 OID 16646)
 -- Name: coupon coupon_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -619,7 +652,7 @@ ALTER TABLE ONLY public.coupon ALTER COLUMN coupon_id SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 2797 (class 2604 OID 16597)
+-- TOC entry 2804 (class 2604 OID 16597)
 -- Name: customer customer_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -627,7 +660,7 @@ ALTER TABLE ONLY public.customer ALTER COLUMN customer_id SET DEFAULT nextval('p
 
 
 --
--- TOC entry 2803 (class 2604 OID 16622)
+-- TOC entry 2810 (class 2604 OID 16622)
 -- Name: equipment equipment_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -635,7 +668,7 @@ ALTER TABLE ONLY public.equipment ALTER COLUMN equipment_id SET DEFAULT nextval(
 
 
 --
--- TOC entry 2800 (class 2604 OID 16611)
+-- TOC entry 2807 (class 2604 OID 16611)
 -- Name: equipment_category equipment_category_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -643,7 +676,7 @@ ALTER TABLE ONLY public.equipment_category ALTER COLUMN equipment_category_id SE
 
 
 --
--- TOC entry 2778 (class 2604 OID 16490)
+-- TOC entry 2785 (class 2604 OID 16490)
 -- Name: facility id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -651,7 +684,7 @@ ALTER TABLE ONLY public.facility ALTER COLUMN id SET DEFAULT nextval('public.fac
 
 
 --
--- TOC entry 2781 (class 2604 OID 16491)
+-- TOC entry 2788 (class 2604 OID 16491)
 -- Name: product product_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -659,7 +692,7 @@ ALTER TABLE ONLY public.product ALTER COLUMN product_id SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 2784 (class 2604 OID 16492)
+-- TOC entry 2791 (class 2604 OID 16492)
 -- Name: product_category product_category_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -667,7 +700,7 @@ ALTER TABLE ONLY public.product_category ALTER COLUMN product_category_id SET DE
 
 
 --
--- TOC entry 2788 (class 2604 OID 16545)
+-- TOC entry 2795 (class 2604 OID 16545)
 -- Name: service service_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -675,7 +708,7 @@ ALTER TABLE ONLY public.service ALTER COLUMN service_id SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 2785 (class 2604 OID 16536)
+-- TOC entry 2792 (class 2604 OID 16536)
 -- Name: service_group service_group_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -683,7 +716,7 @@ ALTER TABLE ONLY public.service_group ALTER COLUMN service_group_id SET DEFAULT 
 
 
 --
--- TOC entry 2794 (class 2604 OID 16575)
+-- TOC entry 2801 (class 2604 OID 16575)
 -- Name: staff staff_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -691,7 +724,7 @@ ALTER TABLE ONLY public.staff ALTER COLUMN staff_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 2791 (class 2604 OID 16566)
+-- TOC entry 2798 (class 2604 OID 16566)
 -- Name: staff_category staff_category_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -699,7 +732,7 @@ ALTER TABLE ONLY public.staff_category ALTER COLUMN staff_category_id SET DEFAUL
 
 
 --
--- TOC entry 2814 (class 2604 OID 16680)
+-- TOC entry 2821 (class 2604 OID 16680)
 -- Name: supplier supplier_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -707,7 +740,7 @@ ALTER TABLE ONLY public.supplier ALTER COLUMN supplier_id SET DEFAULT nextval('p
 
 
 --
--- TOC entry 2811 (class 2604 OID 16669)
+-- TOC entry 2818 (class 2604 OID 16669)
 -- Name: supplier_category supplier_category_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -715,7 +748,18 @@ ALTER TABLE ONLY public.supplier_category ALTER COLUMN supplier_category_id SET 
 
 
 --
--- TOC entry 2990 (class 0 OID 16452)
+-- TOC entry 3033 (class 0 OID 16702)
+-- Dependencies: 225
+-- Data for Name: booking; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.booking (booking_id, name, phone_number, "time", email, address, description, service_id, created_at, updated_at) VALUES (1, 'Cuoc hen 1', '113', '20/10/2019', NULL, NULL, NULL, 2, '2019-10-19 17:43:42.705651', '2019-10-19 17:43:42.705651');
+INSERT INTO public.booking (booking_id, name, phone_number, "time", email, address, description, service_id, created_at, updated_at) VALUES (2, 'Cuoc hen 2', '114', '20/11/2019', NULL, NULL, NULL, 2, '2019-10-20 23:13:01.210325', '2019-10-20 23:13:01.210325');
+INSERT INTO public.booking (booking_id, name, phone_number, "time", email, address, description, service_id, created_at, updated_at) VALUES (3, 'Cuoc hen 3', '115', '20/11/2021', NULL, NULL, 'Bac si', 3, '2019-10-20 23:27:12.009728', '2019-10-20 23:31:13.737511');
+
+
+--
+-- TOC entry 3004 (class 0 OID 16452)
 -- Dependencies: 196
 -- Data for Name: branch; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -725,7 +769,7 @@ INSERT INTO public.branch (id, name, phone_number, address, description, email, 
 
 
 --
--- TOC entry 3013 (class 0 OID 16643)
+-- TOC entry 3027 (class 0 OID 16643)
 -- Dependencies: 219
 -- Data for Name: coupon; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -735,7 +779,7 @@ INSERT INTO public.coupon (coupon_id, code, name, description, offer, service_id
 
 
 --
--- TOC entry 3007 (class 0 OID 16594)
+-- TOC entry 3021 (class 0 OID 16594)
 -- Dependencies: 213
 -- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -745,7 +789,7 @@ INSERT INTO public.customer (customer_id, name, phone_number, address, email, ge
 
 
 --
--- TOC entry 3011 (class 0 OID 16619)
+-- TOC entry 3025 (class 0 OID 16619)
 -- Dependencies: 217
 -- Data for Name: equipment; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -755,7 +799,7 @@ INSERT INTO public.equipment (equipment_id, name, status, price, description, ph
 
 
 --
--- TOC entry 3009 (class 0 OID 16608)
+-- TOC entry 3023 (class 0 OID 16608)
 -- Dependencies: 215
 -- Data for Name: equipment_category; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -765,7 +809,7 @@ INSERT INTO public.equipment_category (equipment_category_id, name, created_at, 
 
 
 --
--- TOC entry 2992 (class 0 OID 16462)
+-- TOC entry 3006 (class 0 OID 16462)
 -- Dependencies: 198
 -- Data for Name: facility; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -776,7 +820,7 @@ INSERT INTO public.facility (name, price, description, quantity, photo_dir, stat
 
 
 --
--- TOC entry 2994 (class 0 OID 16472)
+-- TOC entry 3008 (class 0 OID 16472)
 -- Dependencies: 200
 -- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -787,7 +831,7 @@ INSERT INTO public.product (product_id, name, description, photo_dir, created_at
 
 
 --
--- TOC entry 2995 (class 0 OID 16480)
+-- TOC entry 3009 (class 0 OID 16480)
 -- Dependencies: 201
 -- Data for Name: product_category; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -797,7 +841,7 @@ INSERT INTO public.product_category (product_category_id, name, created_at, upda
 
 
 --
--- TOC entry 3001 (class 0 OID 16542)
+-- TOC entry 3015 (class 0 OID 16542)
 -- Dependencies: 207
 -- Data for Name: service; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -807,7 +851,7 @@ INSERT INTO public.service (service_id, name, "time", price, description, photo_
 
 
 --
--- TOC entry 2999 (class 0 OID 16533)
+-- TOC entry 3013 (class 0 OID 16533)
 -- Dependencies: 205
 -- Data for Name: service_group; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -817,7 +861,7 @@ INSERT INTO public.service_group (service_group_id, name, created_at, updated_at
 
 
 --
--- TOC entry 3005 (class 0 OID 16572)
+-- TOC entry 3019 (class 0 OID 16572)
 -- Dependencies: 211
 -- Data for Name: staff; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -827,7 +871,7 @@ INSERT INTO public.staff (staff_id, name, phone_number, address, email, photo_di
 
 
 --
--- TOC entry 3003 (class 0 OID 16563)
+-- TOC entry 3017 (class 0 OID 16563)
 -- Dependencies: 209
 -- Data for Name: staff_category; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -837,7 +881,7 @@ INSERT INTO public.staff_category (staff_category_id, name, created_at, updated_
 
 
 --
--- TOC entry 3017 (class 0 OID 16677)
+-- TOC entry 3031 (class 0 OID 16677)
 -- Dependencies: 223
 -- Data for Name: supplier; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -848,7 +892,7 @@ INSERT INTO public.supplier (supplier_id, code, name, phone_number, address, sup
 
 
 --
--- TOC entry 3015 (class 0 OID 16666)
+-- TOC entry 3029 (class 0 OID 16666)
 -- Dependencies: 221
 -- Data for Name: supplier_category; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -859,7 +903,16 @@ INSERT INTO public.supplier_category (supplier_category_id, name, created_at, up
 
 
 --
--- TOC entry 3038 (class 0 OID 0)
+-- TOC entry 3054 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: booking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.booking_id_seq', 4, true);
+
+
+--
+-- TOC entry 3055 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: branch_branch_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -868,7 +921,7 @@ SELECT pg_catalog.setval('public.branch_branch_id_seq', 7, true);
 
 
 --
--- TOC entry 3039 (class 0 OID 0)
+-- TOC entry 3056 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: coupon_coupon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -877,7 +930,7 @@ SELECT pg_catalog.setval('public.coupon_coupon_id_seq', 3, true);
 
 
 --
--- TOC entry 3040 (class 0 OID 0)
+-- TOC entry 3057 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: customer_customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -886,7 +939,7 @@ SELECT pg_catalog.setval('public.customer_customer_id_seq', 3, true);
 
 
 --
--- TOC entry 3041 (class 0 OID 0)
+-- TOC entry 3058 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: equipment_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -895,7 +948,7 @@ SELECT pg_catalog.setval('public.equipment_category_id_seq', 4, true);
 
 
 --
--- TOC entry 3042 (class 0 OID 0)
+-- TOC entry 3059 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: equipment_equipment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -904,7 +957,7 @@ SELECT pg_catalog.setval('public.equipment_equipment_id_seq', 9, true);
 
 
 --
--- TOC entry 3043 (class 0 OID 0)
+-- TOC entry 3060 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: facility_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -913,7 +966,7 @@ SELECT pg_catalog.setval('public.facility_id_seq', 6, true);
 
 
 --
--- TOC entry 3044 (class 0 OID 0)
+-- TOC entry 3061 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: product_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -922,7 +975,7 @@ SELECT pg_catalog.setval('public.product_category_id_seq', 5, true);
 
 
 --
--- TOC entry 3045 (class 0 OID 0)
+-- TOC entry 3062 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -931,7 +984,7 @@ SELECT pg_catalog.setval('public.product_id_seq', 9, true);
 
 
 --
--- TOC entry 3046 (class 0 OID 0)
+-- TOC entry 3063 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: service_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -940,7 +993,7 @@ SELECT pg_catalog.setval('public.service_group_id_seq', 3, true);
 
 
 --
--- TOC entry 3047 (class 0 OID 0)
+-- TOC entry 3064 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: service_service_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -949,7 +1002,7 @@ SELECT pg_catalog.setval('public.service_service_id_seq', 4, true);
 
 
 --
--- TOC entry 3048 (class 0 OID 0)
+-- TOC entry 3065 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: staff_category_staff_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -958,7 +1011,7 @@ SELECT pg_catalog.setval('public.staff_category_staff_category_id_seq', 3, true)
 
 
 --
--- TOC entry 3049 (class 0 OID 0)
+-- TOC entry 3066 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: staff_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -967,7 +1020,7 @@ SELECT pg_catalog.setval('public.staff_id_seq', 3, true);
 
 
 --
--- TOC entry 3050 (class 0 OID 0)
+-- TOC entry 3067 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: supplier_category_supplier_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -976,7 +1029,7 @@ SELECT pg_catalog.setval('public.supplier_category_supplier_id_seq', 4, true);
 
 
 --
--- TOC entry 3051 (class 0 OID 0)
+-- TOC entry 3068 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -985,7 +1038,16 @@ SELECT pg_catalog.setval('public.supplier_id_seq', 6, true);
 
 
 --
--- TOC entry 2818 (class 2606 OID 16494)
+-- TOC entry 2860 (class 2606 OID 16713)
+-- Name: booking booking_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.booking
+    ADD CONSTRAINT booking_pkey PRIMARY KEY (booking_id);
+
+
+--
+-- TOC entry 2828 (class 2606 OID 16494)
 -- Name: branch branch_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -994,7 +1056,7 @@ ALTER TABLE ONLY public.branch
 
 
 --
--- TOC entry 2840 (class 2606 OID 16655)
+-- TOC entry 2850 (class 2606 OID 16655)
 -- Name: coupon coupon_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1003,7 +1065,7 @@ ALTER TABLE ONLY public.coupon
 
 
 --
--- TOC entry 2834 (class 2606 OID 16604)
+-- TOC entry 2844 (class 2606 OID 16604)
 -- Name: customer customer_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1012,7 +1074,7 @@ ALTER TABLE ONLY public.customer
 
 
 --
--- TOC entry 2836 (class 2606 OID 16616)
+-- TOC entry 2846 (class 2606 OID 16616)
 -- Name: equipment_category equipment_category_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1021,7 +1083,7 @@ ALTER TABLE ONLY public.equipment_category
 
 
 --
--- TOC entry 2838 (class 2606 OID 16630)
+-- TOC entry 2848 (class 2606 OID 16630)
 -- Name: equipment equipment_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1030,7 +1092,7 @@ ALTER TABLE ONLY public.equipment
 
 
 --
--- TOC entry 2820 (class 2606 OID 16496)
+-- TOC entry 2830 (class 2606 OID 16496)
 -- Name: facility facility_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1039,7 +1101,7 @@ ALTER TABLE ONLY public.facility
 
 
 --
--- TOC entry 2824 (class 2606 OID 16498)
+-- TOC entry 2834 (class 2606 OID 16498)
 -- Name: product_category product_category_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1048,7 +1110,7 @@ ALTER TABLE ONLY public.product_category
 
 
 --
--- TOC entry 2822 (class 2606 OID 16500)
+-- TOC entry 2832 (class 2606 OID 16500)
 -- Name: product product_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1057,7 +1119,7 @@ ALTER TABLE ONLY public.product
 
 
 --
--- TOC entry 2826 (class 2606 OID 16554)
+-- TOC entry 2836 (class 2606 OID 16554)
 -- Name: service_group service_group_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1066,7 +1128,7 @@ ALTER TABLE ONLY public.service_group
 
 
 --
--- TOC entry 2828 (class 2606 OID 16552)
+-- TOC entry 2838 (class 2606 OID 16552)
 -- Name: service service_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1075,7 +1137,7 @@ ALTER TABLE ONLY public.service
 
 
 --
--- TOC entry 2830 (class 2606 OID 16586)
+-- TOC entry 2840 (class 2606 OID 16586)
 -- Name: staff_category staff_category_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1084,7 +1146,7 @@ ALTER TABLE ONLY public.staff_category
 
 
 --
--- TOC entry 2832 (class 2606 OID 16583)
+-- TOC entry 2842 (class 2606 OID 16583)
 -- Name: staff staff_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1093,7 +1155,7 @@ ALTER TABLE ONLY public.staff
 
 
 --
--- TOC entry 2844 (class 2606 OID 16674)
+-- TOC entry 2854 (class 2606 OID 16674)
 -- Name: supplier_category supplier_category_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1102,7 +1164,7 @@ ALTER TABLE ONLY public.supplier_category
 
 
 --
--- TOC entry 2846 (class 2606 OID 16692)
+-- TOC entry 2856 (class 2606 OID 16692)
 -- Name: supplier supplier_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1111,7 +1173,7 @@ ALTER TABLE ONLY public.supplier
 
 
 --
--- TOC entry 2842 (class 2606 OID 16658)
+-- TOC entry 2852 (class 2606 OID 16658)
 -- Name: coupon unique_code; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1120,7 +1182,7 @@ ALTER TABLE ONLY public.coupon
 
 
 --
--- TOC entry 2848 (class 2606 OID 16699)
+-- TOC entry 2858 (class 2606 OID 16699)
 -- Name: supplier unique_supplier_code; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1129,7 +1191,15 @@ ALTER TABLE ONLY public.supplier
 
 
 --
--- TOC entry 2855 (class 2620 OID 16501)
+-- TOC entry 2882 (class 2620 OID 16711)
+-- Name: booking booking_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER booking_update_timestamp BEFORE UPDATE ON public.booking FOR EACH ROW EXECUTE PROCEDURE public.set_updated_timestamp();
+
+
+--
+-- TOC entry 2868 (class 2620 OID 16501)
 -- Name: branch branch_table_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1137,7 +1207,7 @@ CREATE TRIGGER branch_table_update_timestamp BEFORE UPDATE ON public.branch FOR 
 
 
 --
--- TOC entry 2866 (class 2620 OID 16656)
+-- TOC entry 2879 (class 2620 OID 16656)
 -- Name: coupon coupon_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1145,7 +1215,7 @@ CREATE TRIGGER coupon_update_timestamp BEFORE UPDATE ON public.coupon FOR EACH R
 
 
 --
--- TOC entry 2863 (class 2620 OID 16605)
+-- TOC entry 2876 (class 2620 OID 16605)
 -- Name: customer customer_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1153,7 +1223,7 @@ CREATE TRIGGER customer_update_timestamp BEFORE UPDATE ON public.customer FOR EA
 
 
 --
--- TOC entry 2864 (class 2620 OID 16614)
+-- TOC entry 2877 (class 2620 OID 16614)
 -- Name: equipment_category equipment_category_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1161,7 +1231,7 @@ CREATE TRIGGER equipment_category_update_timestamp BEFORE UPDATE ON public.equip
 
 
 --
--- TOC entry 2865 (class 2620 OID 16628)
+-- TOC entry 2878 (class 2620 OID 16628)
 -- Name: equipment equipment_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1169,7 +1239,7 @@ CREATE TRIGGER equipment_update_timestamp BEFORE UPDATE ON public.equipment FOR 
 
 
 --
--- TOC entry 2856 (class 2620 OID 16502)
+-- TOC entry 2869 (class 2620 OID 16502)
 -- Name: facility facility_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1177,7 +1247,7 @@ CREATE TRIGGER facility_update_timestamp BEFORE UPDATE ON public.facility FOR EA
 
 
 --
--- TOC entry 2858 (class 2620 OID 16508)
+-- TOC entry 2871 (class 2620 OID 16508)
 -- Name: product_category product_category_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1185,7 +1255,7 @@ CREATE TRIGGER product_category_update_timestamp BEFORE UPDATE ON public.product
 
 
 --
--- TOC entry 2857 (class 2620 OID 16509)
+-- TOC entry 2870 (class 2620 OID 16509)
 -- Name: product product_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1193,7 +1263,7 @@ CREATE TRIGGER product_update_timestamp BEFORE UPDATE ON public.product FOR EACH
 
 
 --
--- TOC entry 2859 (class 2620 OID 16539)
+-- TOC entry 2872 (class 2620 OID 16539)
 -- Name: service_group service_group_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1201,7 +1271,7 @@ CREATE TRIGGER service_group_update_timestamp BEFORE UPDATE ON public.service_gr
 
 
 --
--- TOC entry 2860 (class 2620 OID 16560)
+-- TOC entry 2873 (class 2620 OID 16560)
 -- Name: service service_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1209,7 +1279,7 @@ CREATE TRIGGER service_update_timestamp BEFORE UPDATE ON public.service FOR EACH
 
 
 --
--- TOC entry 2861 (class 2620 OID 16569)
+-- TOC entry 2874 (class 2620 OID 16569)
 -- Name: staff_category staff_category_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1217,7 +1287,7 @@ CREATE TRIGGER staff_category_update_timestamp BEFORE UPDATE ON public.staff_cat
 
 
 --
--- TOC entry 2862 (class 2620 OID 16581)
+-- TOC entry 2875 (class 2620 OID 16581)
 -- Name: staff staff_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1225,7 +1295,7 @@ CREATE TRIGGER staff_update_timestamp BEFORE UPDATE ON public.staff FOR EACH ROW
 
 
 --
--- TOC entry 2867 (class 2620 OID 16672)
+-- TOC entry 2880 (class 2620 OID 16672)
 -- Name: supplier_category supplier_category_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1233,7 +1303,7 @@ CREATE TRIGGER supplier_category_update_timestamp BEFORE UPDATE ON public.suppli
 
 
 --
--- TOC entry 2868 (class 2620 OID 16686)
+-- TOC entry 2881 (class 2620 OID 16686)
 -- Name: supplier supplier_update_timestamp; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1241,7 +1311,7 @@ CREATE TRIGGER supplier_update_timestamp BEFORE UPDATE ON public.supplier FOR EA
 
 
 --
--- TOC entry 2852 (class 2606 OID 16636)
+-- TOC entry 2864 (class 2606 OID 16636)
 -- Name: equipment fk_equipment_category_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1250,7 +1320,7 @@ ALTER TABLE ONLY public.equipment
 
 
 --
--- TOC entry 2850 (class 2606 OID 16555)
+-- TOC entry 2862 (class 2606 OID 16555)
 -- Name: service fk_service_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1259,7 +1329,7 @@ ALTER TABLE ONLY public.service
 
 
 --
--- TOC entry 2853 (class 2606 OID 16659)
+-- TOC entry 2865 (class 2606 OID 16659)
 -- Name: coupon fk_service_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1268,7 +1338,16 @@ ALTER TABLE ONLY public.coupon
 
 
 --
--- TOC entry 2851 (class 2606 OID 16587)
+-- TOC entry 2867 (class 2606 OID 16714)
+-- Name: booking fk_service_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.booking
+    ADD CONSTRAINT fk_service_id FOREIGN KEY (service_id) REFERENCES public.service(service_id);
+
+
+--
+-- TOC entry 2863 (class 2606 OID 16587)
 -- Name: staff fk_staff_category_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1277,7 +1356,7 @@ ALTER TABLE ONLY public.staff
 
 
 --
--- TOC entry 2854 (class 2606 OID 16693)
+-- TOC entry 2866 (class 2606 OID 16693)
 -- Name: supplier fk_supplier_category_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1286,7 +1365,7 @@ ALTER TABLE ONLY public.supplier
 
 
 --
--- TOC entry 2849 (class 2606 OID 16503)
+-- TOC entry 2861 (class 2606 OID 16503)
 -- Name: product pk_product_category_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1294,7 +1373,7 @@ ALTER TABLE ONLY public.product
     ADD CONSTRAINT pk_product_category_id FOREIGN KEY (product_category_id) REFERENCES public.product_category(product_category_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
--- Completed on 2019-10-19 12:28:04
+-- Completed on 2019-10-20 23:32:30
 
 --
 -- PostgreSQL database dump complete
