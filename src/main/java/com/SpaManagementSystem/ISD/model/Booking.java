@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="booking")
 public class Booking {
@@ -25,9 +27,14 @@ public class Booking {
 	private String address;
 	private String description;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="service_id")
+	@JsonIgnore
 	private Service service;
+	
+//	@ManyToOne(fetch=FetchType.EAGER)
+//	@JoinColumn(name="service_id")
+//	private Service service;
 	
 	public Booking() {
 		

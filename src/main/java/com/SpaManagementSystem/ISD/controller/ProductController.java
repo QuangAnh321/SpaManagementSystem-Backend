@@ -62,6 +62,7 @@ public class ProductController {
 			oldProduct.setBrand(newProduct.getBrand());
 			oldProduct.setDescription(newProduct.getDescription());
 			oldProduct.setProductCategory(newProduct.getProductCategory());
+			oldProduct.setSalePrice(newProduct.getSalePrice());
 			repository.save(oldProduct);
 			return new ResponseEntity<Product>(HttpStatus.OK);
 		}

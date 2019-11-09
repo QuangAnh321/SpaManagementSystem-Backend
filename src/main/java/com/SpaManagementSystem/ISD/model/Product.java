@@ -24,21 +24,22 @@ public class Product {
 	private String photo_dir;
 	private String brand;
 	
+	@Column(name="sale_price")
+	private double salePrice;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="product_category_id")
 	private ProductCategory productCategory;
 	
-	
-	
-	
 	public Product(long id, String name, String description, String brand_name, String photo_dir, 
-			ProductCategory productCategory, String brand) {
+			ProductCategory productCategory, String brand, double salePrice) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.photo_dir = photo_dir;
 		this.productCategory = productCategory;
 		this.brand = brand;
+		this.salePrice = salePrice;
 	}
 	
 	public Product() {
@@ -83,6 +84,14 @@ public class Product {
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+
+	public double getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(double salePrice) {
+		this.salePrice = salePrice;
 	}
 
 	
